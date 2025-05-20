@@ -202,11 +202,11 @@ a {
 
 .hero-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--spacing-sm);
   justify-content: center;
   margin: var(--spacing-lg) auto;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 /* Hero Image Section */
@@ -395,7 +395,7 @@ a {
 /* Media Queries */
 @media (min-width: 640px) {
   .hero-buttons {
-    flex-direction: row;
+    flex-direction: column;
   }
 }
 
