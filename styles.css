@@ -276,6 +276,43 @@ a {
   text-decoration: underline;
 }
 
+/* Conversion Levers Section */
+.conversion {
+  padding: var(--spacing-xxl) 0;
+}
+
+.levers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+.lever-card {
+  text-align: center;
+  background-color: var(--color-background);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lever-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.lever-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: white;
+  margin: 0 auto var(--spacing-md);
+}
+
 /* Why Us Section */
 .why-us {
   padding: var(--spacing-xxl) 0;
@@ -411,8 +448,12 @@ a {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .levers-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   
@@ -425,9 +466,13 @@ a {
   .services-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .features-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .levers-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
   
   .footer-content {
