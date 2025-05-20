@@ -254,6 +254,12 @@ a {
   background-color: var(--color-background-light);
 }
 
+.services-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -466,8 +472,7 @@ a {
   }
   
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    grid-template-columns: 1fr;  }
   
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -480,7 +485,12 @@ a {
 
 @media (min-width: 1024px) {
   .services-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .services-layout {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
   }
   
   .features-grid {
