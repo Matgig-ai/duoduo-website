@@ -102,13 +102,6 @@ a {
   z-index: 100;
 }
 
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
 .logo {
   font-weight: 800;
   font-size: 1.25rem;
@@ -500,4 +493,188 @@ a {
   .footer-content {
     grid-template-columns: 2fr 1fr;
   }
+}
+/* Animations pour le menu et sections */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation du header lors du défilement */
+.header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation pour les liens de navigation */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Animation pour le menu mobile */
+@media (max-width: 767px) {
+  .main-nav {
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-background);
+    z-index: 100;
+    padding: var(--spacing-xl) var(--spacing-md);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .main-nav.open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .main-nav .nav-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: 0.1s;
+  }
+
+  .main-nav.open .nav-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .main-nav.open .nav-item:nth-child(2) { transition-delay: 0.2s; }
+  .main-nav.open .nav-item:nth-child(3) { transition-delay: 0.3s; }
+  .main-nav.open .nav-item:nth-child(4) { transition-delay: 0.4s; }
+  .main-nav.open .nav-item:nth-child(5) { transition-delay: 0.5s; }
+
+  /* Animation du burger vers la croix */
+  .mobile-menu-toggle span {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+.header {
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
+  margin-top: 1rem;
+  background-color: #E5E7EB;
+  border-radius: 16px;
+  padding: 0; /* plus rien ici, on va le déplacer */
+  max-width: 960px;
+  margin: 1rem auto 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* ⬅️ centré horizontalement */
+  padding: 0.75rem;         /* marge homogène = H */
+  gap: 2rem;                /* espace entre blocs (logo / nav / bouton) */
+  Position: relative;
+  max-width: 100%;
+}
+
+.logo img {
+  height: 16px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;     /* aligne verticalement */
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  line-height: 1;          /* évite les décalages verticaux */
+  padding: 0.25rem 0.5rem; /* petit padding cliquable */
+  transition: all 0.3s ease;
+}
+
+.nav-link .nav-icon {
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 1024px) {
+  .nav-link .nav-text {
+    display: none;
+  }
+
+  .nav-link:hover .nav-text {
+    display: block;
+    position: absolute;
+    bottom: -1.5rem;
+    background-color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    box-shadow: var(--shadow-sm);
+    font-size: 0.75rem;
+  }
+}
+
+.btn-contact {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 12px;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
