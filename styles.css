@@ -1,7 +1,7 @@
 /* Base styles */
 :root {
-  --color-primary: #0060F0;
-  --color-primary-dark: #0050D0;
+  --color-primary: #6C14FF;  /* Violet comme sur l'image */
+  --color-primary-dark: #5511D0;
   --color-text: #333333;
   --color-text-light: #666666;
   --color-background: #FFFFFF;
@@ -189,7 +189,6 @@ a {
   background-color: var(--color-background-light);
 }
 
-/* Hero Section */
 /* Hero Section - Centered style */
 .hero {
   padding: var(--spacing-xl) 0 var(--spacing-md);
@@ -210,12 +209,6 @@ a {
   max-width: 400px;
 }
 
-@media (min-width: 640px) {
-  .hero-buttons {
-    flex-direction: row;
-  }
-}
-
 /* Hero Image Section */
 .hero-image-section {
   padding: 0 0 var(--spacing-xxl);
@@ -233,40 +226,6 @@ a {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-/* Projects Preview */
-.projects-preview {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--color-background-light);
-}
-
-.preview-card {
-  display: block;
-  box-shadow: var(--shadow-md);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  max-width: 600px;
-  margin: var(--spacing-lg) auto 0;
-}
-
-.preview-card:hover {
-  transform: translateY(-5px);
-}
-
-.preview-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.preview-label {
-  display: block;
-  padding: var(--spacing-md);
-  text-align: center;
-  font-weight: 500;
-  background-color: var(--color-background);
 }
 
 /* Services Section */
@@ -346,6 +305,40 @@ a {
   margin-bottom: var(--spacing-sm);
 }
 
+/* Projects Preview */
+.projects-preview {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--color-background-light);
+}
+
+.preview-card {
+  display: block;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width: 600px;
+  margin: var(--spacing-lg) auto 0;
+}
+
+.preview-card:hover {
+  transform: translateY(-5px);
+}
+
+.preview-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.preview-label {
+  display: block;
+  padding: var(--spacing-md);
+  text-align: center;
+  font-weight: 500;
+  background-color: var(--color-background);
+}
+
 /* Footer */
 .footer {
   background-color: #1A202C;
@@ -413,12 +406,6 @@ a {
   
   .mobile-menu-toggle {
     display: none;
-  }
-  
-  .hero .container {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--spacing-xxl);
   }
   
   .services-grid {
