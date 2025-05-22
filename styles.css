@@ -459,18 +459,18 @@ a {
   .main-nav {
     display: block;
   }
-  
+
   .mobile-menu-toggle {
     display: none;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;  }
-  
+
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .footer-content {
     grid-template-columns: 1fr 1fr;
   }
@@ -485,11 +485,11 @@ a {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
-  
+
   .features-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .footer-content {
     grid-template-columns: 2fr 1fr;
   }
@@ -607,7 +607,7 @@ a {
   top: 20px;
   z-index: 1000;
   margin-top: 1rem;
-  background-color: #E5E7EB;
+  background-color: #f6f6f6;
   border-radius: 16px;
   padding: 0; /* plus rien ici, on va le déplacer */
   max-width: 960px;
