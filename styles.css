@@ -1248,148 +1248,168 @@ body::before {
 }
 
 /* =========================================
-   SERVICES IMMERSIVE - Version Sticky CORRIGÉE
+   SERVICES IMMERSIVE - Thème Blanc + Corrections
    REMPLACER le CSS précédent par cette version
    ========================================= */
 
-/* Section Services avec background immersif */
+/* Section Services avec fond blanc */
 .services.services-immersive {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--color-background); /* Fond blanc */
   border-radius: 24px;
   position: relative;
-  overflow: visible; /* CHANGÉ : visible au lieu de hidden pour permettre sticky */
+  overflow: hidden;
   margin: var(--spacing-xxl) 0;
-  padding: var(--spacing-xxl); /* Ajout du padding ici */
+  width: 100%;
+  max-width: 100%;
+  box-shadow: var(--shadow-lg); /* Ombre subtile pour délimiter */
 }
 
-/* Effet de particules animées en arrière-plan */
+/* Container interne pour le padding */
+.services.services-immersive .container {
+  padding: var(--spacing-xxl) var(--spacing-md);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Effet de particules animées en arrière-plan (plus subtil) */
 .services.services-immersive::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  top: -30%;
+  right: -10%;
+  width: 120%;
+  height: 160%;
+  background: radial-gradient(circle, rgba(108, 20, 255, 0.03) 0%, transparent 70%); /* Violet très subtil */
   animation: floatBackground 8s ease-in-out infinite;
   z-index: 1;
-  pointer-events: none; /* Évite les interférences */
+  pointer-events: none;
 }
 
 /* Layout en 2 colonnes pour desktop */
 .services-layout-immersive {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-xxl);
+  gap: var(--spacing-xl);
   align-items: flex-start;
   position: relative;
   z-index: 2;
-  min-height: 100vh; /* AJOUTÉ : Force la hauteur minimale */
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Colonne de gauche - Sticky CORRIGÉ */
+/* Colonne de gauche - Sticky */
 .services-intro-column {
-  position: -webkit-sticky; /* Safari support */
   position: sticky;
-  top: 6rem; /* CHANGÉ : plus d'espace pour éviter le header */
+  top: 6rem;
   align-self: flex-start;
   height: fit-content;
-  max-height: calc(100vh - 8rem); /* AJOUTÉ : évite les débordements */
+  max-height: calc(100vh - 8rem);
   overflow: visible;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Header dans la colonne sticky */
+/* Header dans la colonne sticky - THÈME SOMBRE */
 .services-intro-column .section-header {
   text-align: left;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
 }
 
 .services-intro-column .section-header h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 800;
-  color: white;
-  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-text); /* Texte sombre */
   text-align: left;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.2;
 }
 
 .services-intro-column .section-header p {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.6;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--color-text-light); /* Texte gris */
+  line-height: 1.5;
   margin: 0;
-  max-width: none;
+  max-width: 100%;
 }
 
-/* Illustration 3D dans la colonne sticky */
+/* Illustration 3D dans la colonne sticky - NOUVEAU DESIGN */
 .services-visual {
-  margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+  width: 100%;
 }
 
 .illustration-3d {
   width: 100%;
-  height: 300px;
-  background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+  height: 250px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); /* Gradient violet Duoduo */
   border-radius: 16px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border); /* Bordure subtile */
 }
 
 .illustration-content {
   text-align: center;
-  color: white;
+  color: white; /* Garde le texte blanc sur fond violet */
   z-index: 2;
   position: relative;
+  padding: var(--spacing-sm);
 }
 
 .illustration-icon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-sm);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
   animation: bounceIcon 2s infinite;
 }
 
 .illustration-text {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .illustration-text span {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
-/* Grille des services - Colonne de droite CORRIGÉE */
+/* Grille des services - Colonne de droite */
 .services-immersive .services-grid {
-  display: flex; /* CHANGÉ : flex au lieu de grid pour meilleur contrôle */
+  display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-lg) 0;
-  min-height: 150vh; /* AUGMENTÉ : plus de hauteur pour voir l'effet */
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+  min-height: 120vh;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Cards services avec glassmorphism */
+/* Cards services - NOUVEAU THÈME CLAIR */
 .services-immersive .service-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--color-background-light); /* Fond gris très clair */
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0; /* AJOUTÉ : empêche la compression */
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  box-shadow: var(--shadow-sm);
 }
 
+/* Barre de couleur en haut de la card */
 .services-immersive .service-card::before {
   content: '';
   position: absolute;
@@ -1397,7 +1417,7 @@ body::before {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
@@ -1408,60 +1428,64 @@ body::before {
 }
 
 .services-immersive .service-card:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: var(--color-background); /* Fond blanc au survol */
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary); /* Bordure violette au survol */
 }
 
-/* Icônes des services */
+/* Icônes des services - COULEUR PRINCIPALE */
 .services-immersive .service-icon {
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
+  width: 48px;
+  height: 48px;
+  background: var(--color-primary); /* Fond violet */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--spacing-md);
-  color: white;
+  margin-bottom: var(--spacing-sm);
+  color: white; /* Icône blanche */
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .services-immersive .service-card:hover .service-icon {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
+  background: var(--color-primary-dark); /* Violet plus foncé au survol */
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(108, 20, 255, 0.3); /* Ombre violette */
 }
 
-/* Texte des services */
+/* Texte des services - TEXTE SOMBRE */
 .services-immersive .service-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: white;
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-text); /* Texte sombre */
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.3;
 }
 
 .services-immersive .service-card p {
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-md);
+  color: var(--color-text-light); /* Texte gris */
+  line-height: 1.5;
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.9rem;
 }
 
-/* Liens des services */
+/* Liens des services - COULEUR PRINCIPALE */
 .services-immersive .service-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
-  color: white;
-  opacity: 0.8;
+  color: var(--color-primary); /* Violet */
   transition: all 0.3s ease;
   text-decoration: none;
+  font-size: 0.875rem;
 }
 
 .services-immersive .service-link:hover {
-  opacity: 1;
-  transform: translateX(5px);
+  color: var(--color-primary-dark); /* Violet plus foncé au survol */
+  transform: translateX(3px);
 }
 
 .services-immersive .service-link::after {
@@ -1470,16 +1494,16 @@ body::before {
 }
 
 .services-immersive .service-link:hover::after {
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
-/* Animations */
+/* Animations (inchangées) */
 @keyframes floatBackground {
   0%, 100% { 
     transform: translateY(0px) rotate(0deg); 
   }
   50% { 
-    transform: translateY(-30px) rotate(5deg); 
+    transform: translateY(-20px) rotate(3deg);
   }
 }
 
@@ -1488,10 +1512,10 @@ body::before {
     transform: translateY(0); 
   }
   40% { 
-    transform: translateY(-10px); 
+    transform: translateY(-8px);
   }
   60% { 
-    transform: translateY(-5px); 
+    transform: translateY(-4px);
   }
 }
 
@@ -1499,12 +1523,23 @@ body::before {
    RESPONSIVE DESIGN - SERVICES IMMERSIVE
    ========================================= */
 
+@media (max-width: 1024px) {
+  /* Tablette */
+  .services-layout-immersive {
+    gap: var(--spacing-md);
+  }
+
+  .services.services-immersive .container {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+}
+
 @media (max-width: 768px) {
   /* Layout mobile - une seule colonne */
   .services-layout-immersive {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    min-height: auto; /* Retire la hauteur forcée sur mobile */
+    gap: var(--spacing-md);
+    min-height: auto;
   }
 
   /* Désactive sticky sur mobile */
@@ -1521,45 +1556,17 @@ body::before {
 
   .services-intro-column .section-header h2 {
     text-align: center;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
   }
 
   /* Services grid mobile */
   .services-immersive .services-grid {
     min-height: auto;
     padding: 0;
+    gap: var(--spacing-sm);
   }
 
-  /* Illustration plus petite sur mobile */
-  .illustration-3d {
-    height: 250px;
-  }
-
-  .illustration-icon {
-    font-size: 2.5rem;
-  }
-
-  .illustration-text span {
-    font-size: 0.875rem;
-  }
-
-  /* Padding réduit sur mobile */
-  .services.services-immersive {
-    margin: var(--spacing-lg) 0;
-    border-radius: 16px;
-    padding: var(--spacing-lg);
-  }
-}
-
-@media (max-width: 480px) {
-  /* Très petit écran */
-  .services-intro-column .section-header h2 {
-    font-size: clamp(1.75rem, 8vw, 2.5rem);
-  }
-
-  .services-intro-column .section-header p {
-    font-size: 1rem;
-  }
-
+  /* Illustration mobile */
   .illustration-3d {
     height: 200px;
   }
@@ -1567,4 +1574,59 @@ body::before {
   .illustration-icon {
     font-size: 2rem;
   }
+
+  .illustration-text span {
+    font-size: 0.75rem;
+  }
+
+  /* Container mobile */
+  .services.services-immersive {
+    margin: var(--spacing-lg) 0;
+    border-radius: 16px;
+  }
+
+  .services.services-immersive .container {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  /* Cards plus compactes sur mobile */
+  .services-immersive .service-card {
+    padding: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Très petit écran */
+  .services.services-immersive .container {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .services-intro-column .section-header h2 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .services-intro-column .section-header p {
+    font-size: 0.875rem;
+  }
+
+  .illustration-3d {
+    height: 180px;
+  }
+
+  .illustration-icon {
+    font-size: 1.75rem;
+  }
+
+  .services-immersive .service-card {
+    padding: var(--spacing-xs);
+  }
+}
+
+/* CORRECTION GLOBALE - Éviter tout scroll horizontal */
+.services.services-immersive,
+.services.services-immersive *,
+.services-layout-immersive,
+.services-layout-immersive * {
+  max-width: 100%;
+  box-sizing: border-box;
 }
