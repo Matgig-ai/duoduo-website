@@ -1246,7 +1246,6 @@ body::before {
     transform: translateY(-5px); 
   }
 }
-
 /* =========================================
    SERVICES IMMERSIVE - Thème Blanc + Corrections
    REMPLACER le CSS précédent par cette version
@@ -1257,7 +1256,7 @@ body::before {
   background: var(--color-background); /* Fond blanc */
   border-radius: 24px;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* CHANGÉ : visible pour permettre sticky */
   margin: var(--spacing-xxl) 0;
   width: 100%;
   max-width: 100%;
@@ -1286,7 +1285,7 @@ body::before {
   pointer-events: none;
 }
 
-/* Layout en 2 colonnes pour desktop */
+/* Layout en 2 colonnes pour desktop FORCE HAUTEUR */
 .services-layout-immersive {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1294,21 +1293,23 @@ body::before {
   align-items: flex-start;
   position: relative;
   z-index: 2;
-  min-height: 100vh;
+  min-height: 120vh; /* AUGMENTÉ : force une hauteur suffisante */
   width: 100%;
   max-width: 100%;
 }
 
-/* Colonne de gauche - Sticky */
+/* Colonne de gauche - Sticky CORRIGÉ */
 .services-intro-column {
+  position: -webkit-sticky; /* Support Safari */
   position: sticky;
-  top: 6rem;
+  top: 4rem; /* RÉDUIT : plus proche pour éviter conflits */
   align-self: flex-start;
   height: fit-content;
-  max-height: calc(100vh - 8rem);
+  max-height: calc(100vh - 6rem); /* AJUSTÉ */
   overflow: visible;
   width: 100%;
   max-width: 100%;
+  z-index: 10; /* AJOUTÉ : z-index élevé */
 }
 
 /* Header dans la colonne sticky - THÈME SOMBRE */
@@ -1381,13 +1382,13 @@ body::before {
   opacity: 0.95;
 }
 
-/* Grille des services - Colonne de droite */
+/* Grille des services - Colonne de droite FORCE HAUTEUR */
 .services-immersive .services-grid {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
   padding: var(--spacing-sm) 0;
-  min-height: 120vh;
+  min-height: 150vh; /* AUGMENTÉ : plus de hauteur pour déclencher sticky */
   width: 100%;
   max-width: 100%;
 }
