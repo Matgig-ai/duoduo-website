@@ -1,7 +1,7 @@
 /* Base styles */
 :root {
-  --color-primary: #6C14FF;  /* Violet comme sur l'image */
-  --color-primary-dark: #5511D0;
+  --color-primary: #6c14FF;
+  --color-primary-dark: #4104b4;
   --color-text: #333333;
   --color-text-light: #666666;
   --color-background: #FFFFFF;
@@ -13,7 +13,7 @@
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-xxl: 5rem;
-  --border-radius: 4px;
+  --border-radius: 12px;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
@@ -33,7 +33,10 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--color-text);
   line-height: 1.6;
-  background-color: var(--color-background);
+  /* Dégradé directement sur body */
+  background: linear-gradient(to bottom, #f0f4ff 0%, #ffffff 70%, #f8f9fa 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 .container {
@@ -43,8 +46,6 @@ body {
   padding: 0 var(--spacing-md);
 }
 
-/* Typography */
-/* nouvelle typo /
 /* Typography avec Candal pour les gros titres */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
@@ -56,8 +57,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-family: 'Candal', 'Inter', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 400; /* Candal n'a qu'un poids */
-  letter-spacing: -0.02em; /* Légère compression */
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 h2 {
@@ -65,13 +66,12 @@ h2 {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   text-align: center;
   margin-bottom: var(--spacing-xl);
-  font-weight: 400; /* Candal n'a qu'un poids */
+  font-weight: 400;
   letter-spacing: -0.01em;
 }
 
-/* H3 reste en Inter ou peut aussi être en Candal */
 h3 {
-  font-family: 'Candal', 'Inter', sans-serif; /* Optionnel */
+  font-family: 'Candal', 'Inter', sans-serif;
   font-size: 1.5rem;
   margin-bottom: var(--spacing-sm);
   font-weight: 400;
@@ -82,20 +82,6 @@ h4, h5, h6 {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
 }
-
-/* Classe spécifique pour forcer Candal */
-.title-candal {
-  font-family: 'Candal', 'Inter', sans-serif !important;
-  font-weight: 400 !important;
-  letter-spacing: -0.02em;
-}
-
-/* Classe pour garder Inter */
-.title-inter {
-  font-family: 'Inter', sans-serif !important;
-}
-
-/* fin nouvelle typo */
 
 p {
   margin-bottom: var(--spacing-md);
@@ -131,12 +117,10 @@ a {
   margin: 1rem auto 0;
   border-radius: 16px;
   max-width: 960px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  /* Effet glassmorphism */
-  background-color: rgba(246, 246, 246, 0.85); /* 85% d'opacité */
-  backdrop-filter: blur(10px); /* Flou de l'arrière-plan */
-  -webkit-backdrop-filter: blur(10px); /* Safari */
-  /* Bordure subtile pour améliorer l'effet */
+  box-shadow: 0 2px 10px rgb(80, 97, 180, 0.2);
+  background-color: rgb(251, 252, 254, 0.85); /* Harmonisé avec le dégradé */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -194,6 +178,7 @@ a {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
+  position: relative;
 }
 
 .nav-link:hover {
@@ -208,6 +193,24 @@ a {
 
 .nav-link .nav-text {
   transition: opacity 0.3s ease;
+}
+
+/* Animation pour les liens de navigation */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
 }
 
 /* Zone 3: Bouton contact à droite */
@@ -252,102 +255,90 @@ a {
 /* Amélioration pour navigateurs qui ne supportent pas backdrop-filter */
 @supports not (backdrop-filter: blur(10px)) {
   .header {
-    background-color: rgba(246, 246, 246, 0.98); /* Opacité plus forte */
+    background-color: rgba(246, 246, 246, 0.98);
   }
 }
 
-/* Responsive : réduction progressive */
-@media (max-width: 800px) {
-  .header-inner {
-    gap: 0.75rem;
-  }
-
-  .nav-list {
-    gap: 0.75rem;
-  }
+/* Buttons généraux */
+.btn {
+  display: inline-block;
+  padding: 1rem 1.75rem; /* ← Modifié ici */
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
 }
 
-@media (max-width: 640px) {
-  .nav-link .nav-text {
-    display: none;
-  }
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
 
-  .header-inner {
-    gap: 0.5rem;
-  }
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
 
-  .nav-list {
-    gap: 0.5rem;
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-background-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Responsive pour boutons */
+@media (max-width: 768px) {
+  .btn {
+    padding: 1rem 1.5rem; /* Plus petits sur mobile */
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .main-nav {
-    display: none;
+  .btn {
+    padding: 1.5rem 1.25rem; /* Très compacts sur petit écran */
+    font-size: 1rem;
   }
+}
 
-  .btn-contact {
-    display: none;
-  }
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
 
-  .mobile-menu-toggle {
-    display: flex;
-  }
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
 
-  /* Menu mobile avec même effet blur */
-  .main-nav.open {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    z-index: 200;
-    padding: var(--spacing-xl) var(--spacing-md);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-  }
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
 
-  .main-nav.open .nav-list {
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    align-items: center;
-    margin-top: 4rem;
-  }
-
-  .main-nav.open .nav-link {
-    font-size: 1.125rem;
-    padding: 1rem;
-  }
-
-  .main-nav.open .nav-link .nav-text {
-    display: block;
-  }
-
-  /* Animation burger vers croix */
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
+.btn-outline:hover {
+  background-color: var(--color-background-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 /* Hero Section - Centered style */
 .hero {
-  padding: var(--spacing-xl) 0 var(--spacing-md);
+  padding: var(--spacing-xl) 0 var(--spacing-xs);
   text-align: center;
+  background: transparent; /* Pas de fond pour laisser le dégradé body */
+  position: relative;
 }
 
 .hero-content-centered {
@@ -357,109 +348,80 @@ a {
 
 .hero-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--spacing-sm);
   justify-content: center;
   margin: var(--spacing-lg) auto;
   max-width: 500px;
 }
 
-/* Hero Image Section */
-  /* Hero Image Section corrigée */
-/* Hero Image Section - correction alignement */
+/* Hero Image Section - Correction définitive du parallaxe */
 .hero-image-section {
   padding: 0 0 var(--spacing-xxl);
 }
 
 .hero-image-container {
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
   position: relative;
   width: 100%;
-  height: 350px;
-  background-color: #f0f0f0;
-  /* Force l'alignement */
-  display: flex;
-  align-items: stretch; /* Étire l'image sur toute la hauteur */
+  aspect-ratio: 16 / 6; /* Ratio plus élégant et stable */
+  overflow: hidden; /* CRITIQUE : masque tout débordement */
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  background-color: #f0f0f0; /* Fallback pendant chargement */
 }
 
 .hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  /* Supprime les espaces par défaut */
-  margin: 0;
-  padding: 0;
-  border: none;
-  vertical-align: top;
-  /* Effet parallaxe */
-  transform: translateY(0);
-  transition: transform 0.1s ease-out;
   will-change: transform;
-  /* Force l'image à occuper tout l'espace */
-  flex: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
+  transition: transform 0.1s ease-out;
+  /* L'image remplit parfaitement le conteneur */
+  min-height: 100%;
+  min-width: 100%;
 }
 
-/* Responsive pour mobile */
+/* Responsive avec aspect-ratio adapté */
 @media (max-width: 768px) {
   .hero-image-container {
-    height: 300px;
+    aspect-ratio: 4 / 3; /* Plus carré sur tablette */
     border-radius: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-image-container {
-    height: 280px;
+    aspect-ratio: 1 / 1; /* Carré sur mobile */
     border-radius: 8px;
   }
 
   .hero-image {
+    /* Désactiver parallaxe sur mobile */
     transform: none !important;
   }
 }
 
-  /* Effet parallaxe très léger */
-  transform: translateY(0);
-  transition: transform 0.1s ease-out;
-  will-change: transform;
-}
-
-/* Version background pour parallaxe subtil */
-.hero-image-parallax {
-  width: 100%;
-  height: 400px;
-  background-image: url('images/data-chart-cro.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
-  /* Parallaxe très réduit */
-  background-attachment: scroll;
-  position: relative;
-}
-
-/* Désactiver sur mobile */
-@media (max-width: 768px) {
-  .hero-image {
-    transform: none !important;
+/* Fallback pour navigateurs sans support aspect-ratio */
+@supports not (aspect-ratio: 16 / 6) {
+  .hero-image-container {
+    height: 350px; /* Fallback desktop */
   }
 
-  .hero-image-parallax {
-    background-attachment: scroll;
+  @media (max-width: 768px) {
+    .hero-image-container {
+      height: 300px;
+    }
   }
-}
 
-/* Effet hover très subtil (optionnel) */
-.hero-image-container:hover .hero-image {
-  transform: scale(1.02); /* Juste 2% de zoom */
+  @media (max-width: 480px) {
+    .hero-image-container {
+      height: 280px;
+    }
+  }
 }
 
 /* Services Section */
@@ -510,10 +472,12 @@ a {
   margin-top: var(--spacing-sm);
   font-weight: 500;
   color: var(--color-primary);
+  transition: all 0.3s ease;
 }
 
 .service-link:hover {
   text-decoration: underline;
+  color: var(--color-primary-dark);
 }
 
 /* Conversion Levers Section */
@@ -681,36 +645,125 @@ a {
   transform: translateY(0);
 }
 
-/* Animation pour les liens de navigation */
-.nav-link {
-  position: relative;
+/* Classes utiles */
+.title-candal {
+  font-family: 'Candal', 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: var(--color-primary);
-  transition: width 0.3s ease, left 0.3s ease;
+.title-inter {
+  font-family: 'Inter', sans-serif !important;
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-  left: 0;
-}
+/* Responsive : réduction progressive du header */
+@media (max-width: 800px) {
+  .header-inner {
+    gap: 0.75rem;
+  }
 
-/* Media Queries générales */
-@media (min-width: 640px) {
-  .hero-buttons {
-    flex-direction: row;
+  .nav-list {
+    gap: 0.75rem;
   }
 }
 
+@media (max-width: 640px) {
+  .nav-link .nav-text {
+    display: none;
+  }
+
+  .header-inner {
+    gap: 0.5rem;
+  }
+
+  .nav-list {
+    gap: 0.5rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-nav {
+    display: none;
+  }
+
+  .btn-contact {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .hero-image-container {
+    height: 280px;
+    border-radius: 8px;
+  }
+
+  .hero-image {
+    transform: none !important;
+  }
+
+  /* Menu mobile avec même effet blur */
+  .main-nav.open {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 200;
+    padding: var(--spacing-xl) var(--spacing-md);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .main-nav.open .nav-list {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: center;
+    margin-top: 4rem;
+  }
+
+  .main-nav.open .nav-link {
+    font-size: 1.125rem;
+    padding: 1rem;
+  }
+
+  .main-nav.open .nav-link .nav-text {
+    display: block;
+  }
+
+  /* Animation burger vers croix */
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+/* Media Queries générales */
 @media (min-width: 768px) {
+  .hero-image-container {
+    height: 450px;
+    border-radius: 12px;
+  }
+
   .services-grid {
     grid-template-columns: 1fr;
   }
@@ -741,4 +794,220 @@ a {
   .footer-content {
     grid-template-columns: 2fr 1fr;
   }
+}
+/* Section logos clients avec défilement automatique */
+.clients-logos {
+  padding: var(--spacing-xl) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dégradés blanc sur les côtés */
+.clients-logos::before,
+.clients-logos::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clients-logos::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background), transparent);
+}
+
+.clients-logos::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background), transparent);
+}
+
+.logos-marquee {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.logos-track {
+  display: inline-flex;
+  align-items: center;
+  animation: scroll 60s linear infinite; /* 2 fois plus lent */
+  gap: 4rem; /* Espace entre les logos */
+}
+
+.logo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  min-width: 120px;
+  opacity: 0.8; /* Légèrement transparent */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.logo-item:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.client-logo {
+  max-height: 40px;
+  max-width: 100px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Logos en noir - pas de filtre grayscale */
+  transition: opacity 0.3s ease;
+}
+
+.logo-item:hover .client-logo {
+  opacity: 1;
+}
+
+/* Animation de défilement */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Se déplace de 50% car on a dupliqué les logos */
+  }
+}
+
+/* Pause au hover de la section entière */
+.clients-logos:hover .logos-track {
+  animation-play-state: paused;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .clients-logos {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .clients-logos::before,
+  .clients-logos::after {
+    width: 24px; /* Dégradé plus petit sur mobile */
+  }
+
+  .logos-track {
+    gap: 3rem;
+    animation-duration: 50s; /* Plus lent aussi sur mobile */
+  }
+
+  .logo-item {
+    height: 50px;
+    min-width: 100px;
+  }
+
+  .client-logo {
+    max-height: 32px;
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .clients-logos::before,
+  .clients-logos::after {
+    width: 20px;
+  }
+
+  .logos-track {
+    gap: 2rem;
+    animation-duration: 40s;
+  }
+
+  .logo-item {
+    height: 40px;
+    min-width: 80px;
+  }
+
+  .client-logo {
+    max-height: 28px;
+    max-width: 60px;
+  }
+}
+
+/* Version alternative avec gradient de fade */
+.clients-logos-fade {
+  position: relative;
+}
+
+.clients-logos-fade::before,
+.clients-logos-fade::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clients-logos-fade::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background), transparent);
+}
+
+.clients-logos-fade::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background), transparent);
+}
+
+/* Version avec titre optionnel */
+.clients-logos-with-title {
+  text-align: center;
+  padding: var(--spacing-xxl) 0;
+}
+
+.clients-logos-with-title h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Animation plus lente et élégante */
+.logos-track-slow {
+  animation: scroll 45s linear infinite;
+}
+
+/* Animation qui s'arrête et repart */
+.logos-track-pause {
+  animation: scrollWithPause 40s linear infinite;
+}
+
+@keyframes scrollWithPause {
+  0% { transform: translateX(0); }
+  48% { transform: translateX(-48%); }
+  52% { transform: translateX(-48%); } /* Pause de 4% */
+  100% { transform: translateX(-50%); }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(to top, #fff 0%, #f0f4ff 100%);
+}
+
+.nav-link .nav-icon img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+.nav-link:hover .nav-icon img {
+  filter: brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(2486%) hue-rotate(254deg) brightness(91%) contrast(102%);
 }
