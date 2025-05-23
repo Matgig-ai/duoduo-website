@@ -77,3 +77,49 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+// effet parallaxe pour l'image de la section hero
+// Parallaxe optimal - version finale
+function initCenteredParallax() {
+  const heroImage = document.querySelector('.hero-image');
+  const heroSection = document.querySelector('.hero-image-section');
+
+  if (!heroImage || !heroSection) return;
+
+  // IMPORTANT : S'assurer que l'image part de la position normale
+  heroImage.style.transform = 'translateY(0px)';
+
+  let ticking = false;
+
+  function updateParallax() {
+    const rect = heroSection.getBoundingClientRect();
+    const scrolled = window.pageYOffset;
+
+    // Seulement si la section est visible à l'écran
+    if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+      // Parallaxe très subtil basé sur la position de la section
+      const yPos = (scrolled - heroSection.offsetTop) * 0.1;
+      const limitedYPos = Math.max(-10, Math.min(10, yPos));
+
+      heroImage.style.transform = `translateY(${limitedYPos}px)`;
+    }
+
+    ticking = false;
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+}
+
+// Lancer seulement sur desktop
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth > 768) {
+    initCenteredParallax();
+  }
+});
