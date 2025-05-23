@@ -809,19 +809,19 @@ a {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 32px;
-  z-index: 2;
+  width: 56px;
+  z-index: 10; /* ← AUGMENTEZ ce chiffre */
   pointer-events: none;
 }
 
 .clients-logos::before {
   left: 0;
-  background: linear-gradient(to right, var(--color-background), transparent);
+  background: linear-gradient(to left, rgba(255,255,255,0) 0%, rgba(240,244,255,0) 30%, rgba(240,244,255,1) 100%);
 }
 
 .clients-logos::after {
   right: 0;
-  background: linear-gradient(to left, var(--color-background), transparent);
+background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(240,244,255,0) 30%, rgba(240,244,255,0.5) 100%);
 }
 
 .logos-marquee {
@@ -836,6 +836,7 @@ a {
   align-items: center;
   animation: scroll 60s linear infinite; /* 2 fois plus lent */
   gap: 4rem; /* Espace entre les logos */
+  z-index: 1;
 }
 
 .logo-item {
@@ -845,7 +846,7 @@ a {
   justify-content: center;
   height: 60px;
   min-width: 120px;
-  opacity: 0.8; /* Légèrement transparent */
+  opacity: 1; /* Légèrement transparent */
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
